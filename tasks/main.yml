@@ -1,0 +1,22 @@
+---
+- name: Register to access.redhat.com 
+  redhat_subscription:
+    state: present
+    username: "{{ subscription_manager.user }}"
+    password: "{{ subscription_manager.password }}"
+    pool_ids: "{{ subscription_manager_pool_id }}"
+  when: subscription_manager_pool_id is defined
+
+- name: "Enable {{ subscription_manager_enabled_repos }} repositories"
+  rhsm_repository:
+    name: "{{ item }}"
+    state: enabled
+  with_items: "{{ subscription_manager_enabled_repos }}"
+  when: subscription_manager_enabled_repos is defined
+
+- name: "Disable {{ subscription_manager_disabled_repos }} repositories"
+  rhsm_repository:
+    name: "{{ item }}"
+    state: disabled
+  with_items: "{{ subscription_manager_disabled_repos }}"
+  when: subscription_manager_disabled_repos is defined

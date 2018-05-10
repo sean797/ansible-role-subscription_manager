@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  author: Sean O'Keeffe
+  description: Manage Red Hat subscriptions and repositories.
+  issue_tracker_url: https://github.com/sean797/ansible-role-subscription_manager/issues
+  license: GPLv3
+  min_ansible_version: 2.5
+  platforms:
+  - name: EL
+    versions:
+      - 7
+dependencies: []
