@@ -5,6 +5,10 @@
     username: "{{ subscription_manager.user }}"
     password: "{{ subscription_manager.password }}"
     pool_ids: "{{ subscription_manager_pool_id }}"
+    server_proxy_hostname: "{{ subscription_manager.proxy_hostname | default(omit) }}"
+    server_proxy_password: "{{ subscription_manager.proxy_password | default(omit) }}"
+    server_proxy_port: "{{ subscription_manager.proxy_port | default(omit) }}"
+    server_proxy_user: "{{ subscription_manager.proxy_user | default(omit) }}"
   when: subscription_manager_pool_id is defined
 
 - name: "Enable {{ subscription_manager_enabled_repos }} repositories"
