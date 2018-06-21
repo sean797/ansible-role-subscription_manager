@@ -1,4 +1,9 @@
 ---
+- name: install subscription-manager
+  package:
+    name: subscription-manager
+    state: present
+
 - name: Register to access.redhat.com 
   redhat_subscription:
     state: present
