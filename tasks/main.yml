@@ -7,6 +7,7 @@
 - name: Register to access.redhat.com 
   redhat_subscription:
     state: present
+    force_register: "{{ subscription_manager_force_register | default(omit) }}"
     username: "{{ subscription_manager.user }}"
     password: "{{ subscription_manager.password }}"
     pool_ids: "{{ subscription_manager_pool_id }}"
