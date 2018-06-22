@@ -1,11 +1,11 @@
 ---
-subscription_manager:
-  user: joe_user
-  password: somepass
+subscription_manager: {}
 
 #subscription_manager_pool_id: 
 #  - 0123456789abcdef0123456789abcdef
 
 
-subscription_manager_enabled_repos:
-  - rhel-7-server-rpms
+#subscription_manager_enabled_repos:
+#  - rhel-7-server-rpms
+
+#subscription_manager_satellite_url: https://sat6.example.com

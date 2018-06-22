@@ -4,18 +4,26 @@
     name: subscription-manager
     state: present
 
+- name:
+  package:
+    name: "{{ subscription_manager_satellite_url }}/pub/katello-ca-consumer-latest.noarch.rpm"
+  when: subscription_manager_satellite_url is defined
+
 - name: Register to access.redhat.com 
   redhat_subscription:
     state: present
     force_register: "{{ subscription_manager_force_register | default(omit) }}"
-    username: "{{ subscription_manager.user }}"
-    password: "{{ subscription_manager.password }}"
-    pool_ids: "{{ subscription_manager_pool_id }}"
+    username: "{{ subscription_manager.user | default(omit) }}"
+    password: "{{ subscription_manager.password | default(omit) }}"
+    pool_ids: "{{ subscription_manager_pool_id | default(omit) }}"
+    activationkey: "{{ subscription_manager_activation_key | default(omit) }}"
+    org_id: "{{ subscription_manager_org_id | default(omit) }}"
     server_proxy_hostname: "{{ subscription_manager.proxy_hostname | default(omit) }}"
     server_proxy_password: "{{ subscription_manager.proxy_password | default(omit) }}"
     server_proxy_port: "{{ subscription_manager.proxy_port | default(omit) }}"
     server_proxy_user: "{{ subscription_manager.proxy_user | default(omit) }}"
-  when: subscription_manager_pool_id is defined
+    autosubscribe: "{{ subscription_manager_autosubscribe | default(omit) }}"
+  when: subscription_manager_pool_id is defined or subscription_manager_activation_key is defined
 
 - name: "Enable {{ subscription_manager_enabled_repos }} repositories"
   rhsm_repository:
