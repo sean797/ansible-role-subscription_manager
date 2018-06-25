@@ -4,10 +4,15 @@
     name: subscription-manager
     state: present
 
-- name:
+- name: install katello-ca-consumer rpm
   package:
     name: "{{ subscription_manager_satellite_url }}/pub/katello-ca-consumer-latest.noarch.rpm"
   when: subscription_manager_satellite_url is defined
+
+- name: Remove Satelite 5 
+  file:
+    path: /etc/sysconfig/rhn/systemid
+    state: absent
 
 - name: Register to Portal or Satellite
   redhat_subscription:
