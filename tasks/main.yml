@@ -9,7 +9,7 @@
     name: "{{ subscription_manager_satellite_url }}/pub/katello-ca-consumer-latest.noarch.rpm"
   when: subscription_manager_satellite_url is defined
 
-- name: Register to access.redhat.com 
+- name: Register to Portal or Satellite
   redhat_subscription:
     state: present
     force_register: "{{ subscription_manager_force_register | default(omit) }}"
